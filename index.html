@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FITLOG">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>FITLOG - Fitness Tracker</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- HOME SCREEN -->
+        <div id="homeScreen" class="screen active">
+            <div class="header">
+                <h1>FITLOG</h1>
+                <div class="date" id="currentDate"></div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏃</div>
+                    <div class="stat-value" id="todayKm">0</div>
+                    <div class="stat-label">km run</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💪</div>
+                    <div class="stat-value" id="todayPushups">0</div>
+                    <div class="stat-label">pushups</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🍎</div>
+                    <div class="stat-value" id="todayCalories">0</div>
+                    <div class="stat-label">calories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🥩</div>
+                    <div class="stat-value" id="todayProtein">0</div>
+                    <div class="stat-label">protein (g)</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="showScreen('workoutScreen')">
+                    <span class="btn-icon">🏋️</span>
+                    Log Workout
+                </button>
+                <button class="btn btn-primary" onclick="showScreen('foodScreen')">
+                    <span class="btn-icon">🍽️</span>
+                    Log Food
+                </button>
+                <button class="btn btn-secondary" onclick="showScreen('historyScreen')">
+                    <span class="btn-icon">📊</span>
+                    History
+                </button>
+            </div>
+        </div>
+
+        <!-- WORKOUT SCREEN -->
+        <div id="workoutScreen" class="screen">
+            <div class="header">
+                <button class="back-btn" onclick="showScreen('homeScreen')">←</button>
+                <h2>Log Workout</h2>
+            </div>
+
+            <div class="form-container">
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="workoutType" class="input">
+                        <option value="running">Running</option>
+                        <option value="pushups">Pushups</option>
+                        <option value="situps">Situps</option>
+                        <option value="squats">Squats</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="runningInput">
+                    <label>Distance (km)</label>
+                    <input type="number" step="0.1" id="runningKm" class="input" placeholder="5.0">
+                </div>
+
+                <div class="form-group" id="repsInput" style="display:none;">
+                    <label>Reps</label>
+                    <input type="number" id="reps" class="input" placeholder="50">
+                </div>
+
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <textarea id="workoutNotes" class="input" rows="3" placeholder="How did it feel?"></textarea>
+                </div>
+
+                <button class="btn btn-primary btn-large" onclick="saveWorkout()">
+                    Save Workout
+                </button>
+            </div>
+        </div>
+
+        <!-- FOOD SCREEN -->
+        <div id="foodScreen" class="screen">
+            <div class="header">
+                <button class="back-btn" onclick="showScreen('homeScreen')">←</button>
+                <h2>Log Food</h2>
+            </div>
+
+            <div class="form-container">
+                <div class="form-group">
+                    <label>Food Name</label>
+                    <input type="text" id="foodName" class="input" placeholder="Chicken breast">
+                </div>
+
+                <div class="form-group">
+                    <label>Calories</label>
+                    <input type="number" id="foodCalories" class="input" placeholder="250">
+                </div>
+
+                <div class="form-group">
+                    <label>Protein (g)</label>
+                    <input type="number" id="foodProtein" class="input" placeholder="30">
+                </div>
+
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <textarea id="foodNotes" class="input" rows="3" placeholder="Meal details..."></textarea>
+                </div>
+
+                <button class="btn btn-primary btn-large" onclick="saveFood()">
+                    Save Food
+                </button>
+            </div>
+        </div>
+
+        <!-- HISTORY SCREEN -->
+        <div id="historyScreen" class="screen">
+            <div class="header">
+                <button class="back-btn" onclick="showScreen('homeScreen')">←</button>
+                <h2>History</h2>
+            </div>
+
+            <div class="history-container" id="historyContainer">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">📝</div>
+                    <p>No entries yet</p>
+                    <p class="empty-subtitle">Start logging your workouts and meals!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
