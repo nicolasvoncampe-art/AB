@@ -21,42 +21,69 @@
                 <div class="date" id="currentDate"></div>
             </div>
             
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">🏃</div>
-                    <div class="stat-value" id="todayKm">0</div>
-                    <div class="stat-label">km run</div>
+            <!-- Calendar Section -->
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="calendar-month" id="calendarMonth"></div>
+                    <div class="calendar-nav">
+                        <button class="calendar-nav-btn" onclick="changeMonth(-1)">←</button>
+                        <button class="calendar-nav-btn" onclick="changeMonth(1)">→</button>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">💪</div>
-                    <div class="stat-value" id="todayPushups">0</div>
-                    <div class="stat-label">pushups</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🍎</div>
-                    <div class="stat-value" id="todayCalories">0</div>
-                    <div class="stat-label">calories</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🥩</div>
-                    <div class="stat-value" id="todayProtein">0</div>
-                    <div class="stat-label">protein (g)</div>
-                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
             </div>
 
-            <div class="action-buttons">
-                <button class="btn btn-primary" onclick="showScreen('workoutScreen')">
-                    <span class="btn-icon">🏋️</span>
-                    Log Workout
-                </button>
-                <button class="btn btn-primary" onclick="showScreen('foodScreen')">
-                    <span class="btn-icon">🍽️</span>
-                    Log Food
-                </button>
-                <button class="btn btn-secondary" onclick="showScreen('historyScreen')">
-                    <span class="btn-icon">📊</span>
-                    History
-                </button>
+            <!-- Feature Sections -->
+            <div style="padding: 0 20px 20px;">
+                <div class="feature-section" onclick="showScreen('workoutScreen')">
+                    <div class="feature-header">
+                        <div class="feature-title">
+                            <span class="feature-icon">🏋️</span>
+                            Workouts
+                        </div>
+                        <span class="arrow-icon">→</span>
+                    </div>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="homeRunningKm">0</div>
+                            <div class="feature-stat-label">km today</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="homePushups">0</div>
+                            <div class="feature-stat-label">pushups today</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section" onclick="showScreen('foodScreen')">
+                    <div class="feature-header">
+                        <div class="feature-title">
+                            <span class="feature-icon">🍽️</span>
+                            Nutrition
+                        </div>
+                        <span class="arrow-icon">→</span>
+                    </div>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="homeCalories">0</div>
+                            <div class="feature-stat-label">calories today</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="homeProtein">0</div>
+                            <div class="feature-stat-label">protein (g) today</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-section" onclick="showScreen('historyScreen')">
+                    <div class="feature-header">
+                        <div class="feature-title">
+                            <span class="feature-icon">📊</span>
+                            History
+                        </div>
+                        <span class="arrow-icon">→</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -64,10 +91,38 @@
         <div id="workoutScreen" class="screen">
             <div class="header">
                 <button class="back-btn" onclick="showScreen('homeScreen')">←</button>
-                <h2>Log Workout</h2>
+                <h2>Workouts</h2>
             </div>
 
+            <!-- Today's Summary -->
+            <div style="padding: 20px; padding-bottom: 0;">
+                <div class="feature-section" style="cursor: default;">
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">Today's Progress</div>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="workoutRunningKm">0</div>
+                            <div class="feature-stat-label">km run</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="workoutPushups">0</div>
+                            <div class="feature-stat-label">pushups</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="workoutSitups">0</div>
+                            <div class="feature-stat-label">situps</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="workoutSquats">0</div>
+                            <div class="feature-stat-label">squats</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Log New Workout -->
             <div class="form-container">
+                <div style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text-primary);">Log New Workout</div>
+                
                 <div class="form-group">
                     <label>Type</label>
                     <select id="workoutType" class="input">
@@ -103,10 +158,30 @@
         <div id="foodScreen" class="screen">
             <div class="header">
                 <button class="back-btn" onclick="showScreen('homeScreen')">←</button>
-                <h2>Log Food</h2>
+                <h2>Nutrition</h2>
             </div>
 
+            <!-- Today's Summary -->
+            <div style="padding: 20px; padding-bottom: 0;">
+                <div class="feature-section" style="cursor: default;">
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">Today's Totals</div>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="foodCalories">0</div>
+                            <div class="feature-stat-label">calories</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value" id="foodProtein">0</div>
+                            <div class="feature-stat-label">protein (g)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Log New Food -->
             <div class="form-container">
+                <div style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text-primary);">Log New Meal</div>
+
                 <div class="form-group">
                     <label>Food Name</label>
                     <input type="text" id="foodName" class="input" placeholder="Chicken breast">
@@ -114,12 +189,12 @@
 
                 <div class="form-group">
                     <label>Calories</label>
-                    <input type="number" id="foodCalories" class="input" placeholder="250">
+                    <input type="number" id="foodCaloriesInput" class="input" placeholder="250">
                 </div>
 
                 <div class="form-group">
                     <label>Protein (g)</label>
-                    <input type="number" id="foodProtein" class="input" placeholder="30">
+                    <input type="number" id="foodProteinInput" class="input" placeholder="30">
                 </div>
 
                 <div class="form-group">
@@ -128,7 +203,7 @@
                 </div>
 
                 <button class="btn btn-primary btn-large" onclick="saveFood()">
-                    Save Food
+                    Save Meal
                 </button>
             </div>
         </div>
